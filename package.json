@@ -1,0 +1,22 @@
+{
+  "name": "lol_discord_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yukiisama/Lol_Discord_Bot.git"
+  },
+  "author": "Alexis Perignon",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Yukiisama/Lol_Discord_Bot/issues"
+  },
+  "homepage": "https://github.com/Yukiisama/Lol_Discord_Bot#readme",
+  "dependencies": {
+    "discord.js": "^11.5.0"
+  }
+}
