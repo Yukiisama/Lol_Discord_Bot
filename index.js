@@ -1,7 +1,7 @@
 // Load up the discord.js library
 const Discord = require("discord.js");
 const client = new Discord.Client();
-//const config = require("./config.json"); 
+const config = require("./config.json"); 
 
 client.on("message", async message => {
     if (message.author.bot) return;
