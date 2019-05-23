@@ -21,7 +21,7 @@ client.on("message", async message => {
     }
     if (command === "img") {
         var webshot = require('webshot');
-
+        var fs      = require('fs');
         var options = {
             shotSize: {
                 width: 'all',
