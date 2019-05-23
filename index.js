@@ -27,20 +27,7 @@ client.on("message", async message => {
         message.delete().catch(O_o => {});
         message.channel.send(sayMessage);
     }
-    if (command === "img") {
-        message.channel.send("hey");
-        /*webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', function (err) {
-            if (!err) {
-                console.log('Screenshot taken!');
-            }
-        });
-        message.channel.send('cc', {
-            files: [
-                "./nidalee.png"
-            ]
-        });*/
-        //fs.unlinkSync("./nidalee.png");
-    }
+    
 
 });
 
