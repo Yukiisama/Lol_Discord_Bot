@@ -29,12 +29,12 @@ client.on("message", async message => {
     }
     if (command === "img") {
         message.channel.send("hey");
-        webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', function (err) {
+        /*webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', function (err) {
             if (!err) {
                 console.log('Screenshot taken!');
             }
         });
-        /*message.channel.send('cc', {
+        message.channel.send('cc', {
             files: [
                 "./nidalee.png"
             ]
