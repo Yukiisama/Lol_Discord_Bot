@@ -35,11 +35,11 @@ client.on("message", async message => {
                 console.log('Screenshot taken!');
             }
         });
-        message.channel.send('cc', {
+        /*message.channel.send('cc', {
             files: [
                 "./nidalee.png"
             ]
-        });
+        });*/
         message.channel.send("hey");
 
         //fs.unlinkSync("./nidalee.png");
