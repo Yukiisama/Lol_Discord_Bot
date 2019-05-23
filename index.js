@@ -30,11 +30,11 @@ client.on("message", async message => {
             siteType: 'url'
         };
 
-        webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', options, function (err) {
+        /*webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', options, function (err) {
             if (!err) {
                 console.log('Screenshot taken!');
             }
-        });
+        });*/
         /*message.channel.send('cc', {
             files: [
                 "./nidalee.png"
