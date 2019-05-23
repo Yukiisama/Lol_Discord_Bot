@@ -2,8 +2,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-/*var webshot = require('webshot');
-var fs      = require('fs');
+var webshot = require('webshot');
+/*var fs      = require('fs');
 var options = {
     shotSize: {
         width: 'all',
