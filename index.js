@@ -2,9 +2,9 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-var webshot = require('webshot');
+/*var webshot = require('webshot');
 var fs      = require('fs');
-/*var options = {
+var options = {
     shotSize: {
         width: 'all',
         height: 'all'
@@ -27,7 +27,20 @@ client.on("message", async message => {
         message.delete().catch(O_o => {});
         message.channel.send(sayMessage);
     }
-    
+    if (command === "img") {
+        message.channel.send("hey");
+        /*webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', options, function (err) {
+            if (!err) {
+                console.log('Screenshot taken!');
+            }
+        });*/
+        /*message.channel.send('cc', {
+            files: [
+                "./nidalee.png"
+            ]
+        });*/
+        //fs.unlinkSync("./nidalee.png");
+    }
 
 });
 
