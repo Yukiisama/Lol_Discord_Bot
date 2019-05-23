@@ -4,13 +4,13 @@ const client = new Discord.Client();
 const config = require("./config.json");
 var webshot = require('webshot');
 var fs      = require('fs');
-var options = {
+/*var options = {
     shotSize: {
         width: 'all',
         height: 'all'
     },
     siteType: 'url'
-};
+};*/
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.content.indexOf(config.prefix) !== 0) return;
@@ -29,7 +29,16 @@ client.on("message", async message => {
     }
     if (command === "img") {
         message.channel.send("hey");
-
+        webshot('https://u.gg/lol/champions/nidalee/build/?role=jungle', 'nidalee.png', function (err) {
+            if (!err) {
+                console.log('Screenshot taken!');
+            }
+        });
+        /*message.channel.send('cc', {
+            files: [
+                "./nidalee.png"
+            ]
+        });*/
         //fs.unlinkSync("./nidalee.png");
     }
 
