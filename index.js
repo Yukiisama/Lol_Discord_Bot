@@ -40,7 +40,9 @@ client.on("message", async message => {
                 "./nidalee.png"
             ]
         });
-        fs.unlinkSync("./nidalee.png");
+        message.channel.send("hey");
+
+        //fs.unlinkSync("./nidalee.png");
     }
 
 });
