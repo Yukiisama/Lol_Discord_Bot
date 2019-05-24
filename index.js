@@ -7,21 +7,44 @@ var webshot = require('webshot');
 var fs = require('fs');
 var options = {
     screenSize: {
-        width: 1900
-      , height: 1150
-      },
+        width: 1900,
+        height: 810
+    },
     shotOffset: {
-        left: 437,
+        left: 637,  
         right: 0,
-        top: 0,
+        top: 69,
         bottom: 0
     },
     shotSize: {
-        width: 'all',
-        height: 1150
+        width: 1100, // can be 'all' or 'window' or number
+        height: 810
     },
     siteType: 'url',
 };
+/***********************************************************END VARIABLES*********************************************************************************** */
+
+/**
+ * 
+ * @param {*} img_name the image_name you want to register
+ * @param {*} path the path to the image called img_name
+ * @param {*} website the website you want to screenshot
+ * @param {*} message the discord message (i.e client has asked to our bot)
+ */
+function shot(img_name, path, website, message) {
+    webshot(website, img_name, options, function (err) {
+        if (!err) {
+            console.log('Screenshot taken!');
+            message.channel.send("", {
+                files: [path]
+            }).then().catch(console.error);
+        }
+    });
+}
+
+/**
+ * Treat the message and check if there is something to do 
+ */
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.content.indexOf(config.prefix) !== 0) return;
@@ -40,39 +63,20 @@ client.on("message", async message => {
         if (args[1] != 'middle' && args[1] != 'support' && args[1] != 'top' && args[1] != 'adc' && args[1] != 'jungle' || args.length > 2) {
             message.channel.send("Command line is !a hero <champion> <middle/support/jungle/adc/top");
         } else {
-            webshot('https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1], 'nidalee.png', options, function (err) {
-                if (!err) {
-                    console.log('Screenshot taken!');
-                    message.channel.send("", {
-                        files: ['./nidalee.png']
-                    }).then().catch(console.error);
-                }
-            });
-            options.shotOffset.top += 1179;
-            options.shotSize.height = 1020-170;
-            options.screenSize.height=1020-170;
-            webshot('https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1], 'nidalee2.png', options, function (err) {
-                if (!err) {
-                    console.log('Screenshot taken!');
-                    message.channel.send("", {
-                        files: ['./nidalee2.png']
-                    }).then().catch(console.error);
-                }
-            });
-            options.shotOffset.top += 1000-179;
-            options.shotSize.height = 550;
-            options.screenSize.height=550;
-            webshot('https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1], 'nidalee3.png', options, function (err) {
-                if (!err) {
-                    console.log('Screenshot taken!');
-                    message.channel.send("", {
-                        files: ['./nidalee3.png']
-                    }).then().catch(console.error);
-                }
-            });
-            options.shotOffset.top = 0;
-            options.shotSize.top = 1100;
-            options.screenSize.height=1080;
+            var ugg_website = 'https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1];
+            shot('nidalee.png', './nidalee.png', ugg_website, message);
+            options.shotOffset.top += 813;
+            options.shotSize.height = 259;
+            options.screenSize.height = 259;
+            shot('nidalee1.png', './nidalee1.png', ugg_website, message);
+            options.shotOffset.top += 841;
+            options.shotSize.height = 850;
+            options.screenSize.height = 850;
+            shot('nidalee2.png', './nidalee2.png', ugg_website, message);
+            options.shotOffset.top = 69;
+            options.shotSize.height = 810;
+            options.screenSize.height = 810;
+
         }
     }
 });
