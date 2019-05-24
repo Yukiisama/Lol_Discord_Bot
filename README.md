@@ -17,7 +17,7 @@ npm install webshot
 node index.js
 ```
 ## Commands
- * __!a say__ this is a random sentence :  bot delete your message then write what you ask 
+ * __!a say__ _this is a random sentence_ :  bot delete your message then write what you ask 
  * __!a hero <champion> <top/middle/jungle/adc/support>__: bot send informations from u.gg about the champion you asked for (i.e screenshots) 
  * __!a ping__ : a simple test of ping
  * __!a randomrole__ : give you a random League of Legends role
