@@ -12,7 +12,7 @@ var options = {
         height: 810
     },
     shotOffset: {
-        left: 637,  
+        left: 637,
         right: 0,
         top: 69,
         bottom: 0
@@ -23,6 +23,7 @@ var options = {
     },
     siteType: 'url',
 };
+var role_array = ["top", "middle", "jungle", "adc", "support"];
 /***********************************************************END VARIABLES*********************************************************************************** */
 
 /**
@@ -60,8 +61,18 @@ client.on("message", async message => {
         message.delete().catch(O_o => {});
         message.channel.send(sayMessage);
     }
+    if (command === "corobizar") {
+        message.channel.send("https://www.twitch.tv/corobizar");
+    }
+    if (command === "mv") {
+        message.channel.send("https://www.twitch.tv/mistermv");
+    }
+    if (command === "randomrole") {
+        message.channel.send(role_array[Math.floor(Math.random()*role_array.length)]);
+    }
     if (command === "hero") {
-        if (args[1] != 'middle' && args[1] != 'support' && args[1] != 'top' && args[1] != 'adc' && args[1] != 'jungle' || args.length > 2) {
+        if (args[1] != role_array[1] && args[1] != role_array[4] && args[1] != role_array[0] &&
+            args[1] != role_array[3] && args[1] != role_array[2] || args.length > 2) {
             message.channel.send("Command line is !a hero <champion> <middle/support/jungle/adc/top");
         } else {
             var ugg_website = 'https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1];
