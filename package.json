@@ -19,5 +19,6 @@
   "homepage": "https://github.com/Yukiisama/Lol_Discord_Bot#readme",
   "dependencies": {
     "discord.js": "^11.5.0"
+    ,"webshot":"0.18.0"
   }
 }
