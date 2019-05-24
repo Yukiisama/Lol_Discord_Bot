@@ -84,8 +84,8 @@ client.on("message", async message => {
             var ugg_website = 'https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1];
             shot('nidalee.png', './nidalee.png', ugg_website, message);
             options.shotOffset.top += 813;
-            options.shotSize.height = 259;
-            options.screenSize.height = 259;
+            options.shotSize.height = 604;
+            options.screenSize.height = 604;
             shot('nidalee1.png', './nidalee1.png', ugg_website, message);
             options.shotOffset.top += 841;
             options.shotSize.height = 850;
