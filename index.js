@@ -67,6 +67,12 @@ client.on("message", async message => {
     if (command === "mv") {
         message.channel.send("https://www.twitch.tv/mistermv");
     }
+    if (command === "gummy") {
+        message.channel.send("https://www.twitch.tv/elgummy115");
+    }
+    if (command === "yukii") {
+        message.channel.send("https://www.twitch.tv/suyukii");
+    }
     if (command === "randomrole") {
         message.channel.send(role_array[Math.floor(Math.random()*role_array.length)]);
     }
