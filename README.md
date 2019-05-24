@@ -16,3 +16,9 @@ npm install discord.js
 npm install webshot
 node index.js
 ```
+##Commands
+ *!a say this is a random sentence :  bot delete your message then write what you ask 
+ *!a hero <champion> <top/middle/jungle/adc/support> : bot send informations from u.gg about the champion you asked for (i.e screenshots) 
+ *!a ping : a simple test of ping
+ *!a randomrole : give you a random League of Legends role
+ *!a <corobizar/mv/yukii/gummy> : bot send twitch channel of corobizar / mister mv / yukii or gummy
