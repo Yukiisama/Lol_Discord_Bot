@@ -9,7 +9,7 @@ Example if I want discord.js and webshot installed on my heroku app :
     ,"webshot":"0.18.0"
   }
 ```
-### Initialisation local way
+## Initialisation local way
 ```
 npm init -y
 npm install discord.js
