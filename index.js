@@ -2,7 +2,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const config_tok = require("./config_noshare.json"); // Private config in which you can specify your token if you want to use local way
+//Decomment this if local
+//const config_tok = require("./config_noshare.json"); // Private config in which you can specify your token if you want to use local way
 var webshot = require('webshot');
 var fs = require('fs');
 var options = {
@@ -81,5 +82,5 @@ client.on("message", async message => {
     }
 });
 
-client.login(config_tok.token); //Local way
-//client.login(process.env.TOKEN); //Heroku way
+//client.login(config_tok.token); //Local way
+client.login(process.env.TOKEN); //Heroku way
