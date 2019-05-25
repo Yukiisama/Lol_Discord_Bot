@@ -107,7 +107,7 @@ client.on("message", async message => {
         message.channel.send("faut pas que j'oublie que la clé api lol dure que 24h à reset après :(");
         let url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + args_encode[0] + '?api_key=' + process.env.LOL_API;
         Request(message, url, (data) => {
-            message.channel.send(args_encode[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
+            message.channel.send(args[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
         });
     }
 });
