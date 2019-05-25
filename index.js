@@ -29,7 +29,7 @@ var options = {
 var role_array = ["top", "middle", "jungle", "adc", "support"];
 const name_url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/';
 const active_games_url = 'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/'
-var summoner_id;
+var summoner_id ="";
 /***********************************************************END VARIABLES*********************************************************************************** */
 
 /**
@@ -53,7 +53,7 @@ function shot(img_name, path, website, message) {
 function getSummonerId(summoner,message){
     let url_name = name_url + summoner + '?api_key=' + process.env.LOL_API;
         Request(message,url_name,(data) =>{
-        	summoner_id = data.id;
+        	summoner_id += data.id;
         });
 }
 /**
