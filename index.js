@@ -135,7 +135,7 @@ client.on("message", async message => {
         		for(var key in data.bannedChampions){
         			bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
         											+" \n champion : "+getChampFromId(champ,data.bannedChampions[key].championId)
-        											+" \n teamId : "+getChampFromId(champ,data.bannedChampions[key].teamId);
+        											+" \n teamId : "+data.bannedChampions[key].teamId;
         		}
         		 
             	message.channel.send("game Start time : " +data.gameStartTime
