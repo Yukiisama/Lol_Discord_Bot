@@ -53,7 +53,8 @@ function shot(img_name, path, website, message) {
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.content.indexOf(config.prefix) !== 0) return;
-    const args = unescape(encodeURIComponent(message.content.slice(config.prefix.length).trim().split(/ +/g)));
+    var message_content= unescape(encodeURIComponent(message.content));
+    const args = message_content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     if (command === "ping") {
         const m = await message.channel.send("Ping?");
