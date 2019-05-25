@@ -53,8 +53,8 @@ function shot(img_name, path, website, message) {
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.content.indexOf(config.prefix) !== 0) return;
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-    const command = unescape(encodeURIComponent(args.shift().toLowerCase()));
+    const args = unescape(encodeURIComponent(message.content.slice(config.prefix.length).trim().split(/ +/g)));
+    const command = args.shift().toLowerCase();
     if (command === "ping") {
         const m = await message.channel.send("Ping?");
         m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
