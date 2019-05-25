@@ -53,8 +53,9 @@ function shot(img_name, path, website, message) {
 client.on("message", async message => {
     if (message.author.bot) return;
     if (message.content.indexOf(config.prefix) !== 0) return;
-    var message_content= unescape(encodeURIComponent(message.content));
-    const args = message_content.slice(config.prefix.length).trim().split(/ +/g);
+    var message_content_encode= unescape(encodeURIComponent(message.content));
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+    const args_encode = message_content_encode.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     if (command === "ping") {
         const m = await message.channel.send("Ping?");
@@ -103,9 +104,9 @@ client.on("message", async message => {
     }
     if (command === "level") {
         message.channel.send("faut pas que j'oublie que la clé api lol dure que 24h à reset après :(");
-        let url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + args[0] + '?api_key=' + process.env.LOL_API;
+        let url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + args_encode[0] + '?api_key=' + process.env.LOL_API;
         Request(message, url, (data) => {
-            message.channel.send(args[0] + " is level " + data.summonerLevel + ", congrats!");
+            message.channel.send(args[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
         });
     }
 });
