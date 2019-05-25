@@ -28,8 +28,8 @@ var options = {
 };
 var role_array = ["top", "middle", "jungle", "adc", "support"];
 const name_url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/';
-const active_games_url = 'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/'
-
+const active_games_url = 'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/';
+let url_champ = "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json";
 /***********************************************************END VARIABLES*********************************************************************************** */
 
 /**
@@ -50,6 +50,15 @@ function shot(img_name, path, website, message) {
     });
 }
 
+function getChampFromId(champions,id){
+      for (var key in champions.champList.data) {
+          // skip loop if the property is from prototype
+          if (!champions.champList.data.hasOwnProperty(key)) continue;
+          var obj = champions.champList.data[key];
+          if(obj.id === id){ return key;}
+      }
+      return "Not Found";
+}
 
 /**
  * Treat the message and check if there is something to do 
@@ -121,15 +130,24 @@ client.on("message", async message => {
         Request(message,url_name,(data_id) =>{
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
+        		Request(message, url_champ, (champ) => {
+        		var bannedChampionsstring = new Array();
+        		for(var key in data.bannedChampions){
+        			bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
+        											+" \n champion : "+getChampFromId(champ,data.bannedChampions[key].championId)
+        											+" \n teamId : "+getChampFromId(champ,data.bannedChampions[key].teamId);
+        		}
+        		 
             	message.channel.send("game Start time : " +data.gameStartTime
             		+ "\n game Mode :" + data.gameMode
             		+ "\n game Type :" + data.gameType
-            		+ "\n banned champions :" + data.bannedChampions
+            		+ "\n banned champions :" + bannedChampionsstring
             		+ "\n participants :" + data.participants
             		+ "\n gameLength (sec) :" + data.gameLength
             		+ "\n Queue type :" + data.gameQueueConfigId);
             	//[Todo] choose informations usefull then display them in embed discord message
-       		 });
+       		 	});
+        	});
         });
     }
 
