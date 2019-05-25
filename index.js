@@ -2,7 +2,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const Request = require("Request");
+const Request = require("./Request");
 const https = require("https");
 
 //Decomment this if local
