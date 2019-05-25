@@ -27,6 +27,8 @@ var options = {
     siteType: 'url',
 };
 var role_array = ["top", "middle", "jungle", "adc", "support"];
+const name_url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/';
+const active_games_url = 'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/'
 /***********************************************************END VARIABLES*********************************************************************************** */
 
 /**
@@ -47,6 +49,12 @@ function shot(img_name, path, website, message) {
     });
 }
 
+function getSummonerId(summoner,message){
+    let url_name = name_url + summoner + '?api_key=' + process.env.LOL_API;
+        Request(message,url_name,(data) =>{
+            return data.id;
+        });
+}
 /**
  * Treat the message and check if there is something to do 
  */
@@ -107,9 +115,16 @@ client.on("message", async message => {
         }
     }
     if (command === "level") {
-        let url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + args_encode[0] + '?api_key=' + process.env.LOL_API;
+        let url = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
         Request(message, url, (data) => {
             message.channel.send(args[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
+        });
+    }
+    if (command === "match"){
+        const id = getSummonerId(args_encode[0],message);
+        let url = active_games_url + id + '?api_key=' + process.env.LOL_API;
+        Request(message, url, (data) => {
+            message.channel.send(data);
         });
     }
 
