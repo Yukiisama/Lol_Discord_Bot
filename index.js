@@ -121,7 +121,7 @@ client.on("message", async message => {
         Request(message,url_name,(data_id) =>{
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
-            	message.channel.send(url + "--->"+ data);
+            	message.channel.send(JSON.stringify(data));
        		 });
         });
     }
