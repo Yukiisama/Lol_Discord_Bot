@@ -52,6 +52,7 @@ function shot(img_name, path, website, message) {
 function getSummonerId(summoner,message){
     let url_name = name_url + summoner + '?api_key=' + process.env.LOL_API;
         Request(message,url_name,(data) =>{
+        	message.channel.send(summoner + ":" +data.id);
             return data.id;
         });
 }
