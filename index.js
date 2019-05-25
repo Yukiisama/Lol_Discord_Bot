@@ -132,13 +132,13 @@ client.on("message", async message => {
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
         		Request(message, url_champ, (champ) => {
-        		/*
+        		
         		for(var key in data.bannedChampions){
         			bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
         											+" \n champion : "+getChampFromId(champ,data.bannedChampions[key].championId)
         											+" \n teamId : "+data.bannedChampions[key].teamId;
         		}
-        		 */
+        		 
             	message.channel.send("game Start time : " +data.gameStartTime
             		+ "\n game Mode :" + data.gameMode
             		+ "\n game Type :" + data.gameType
