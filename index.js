@@ -127,17 +127,18 @@ client.on("message", async message => {
     }
     if (command === "match"){
         let url_name = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
+        var bannedChampionsstring = new Array();
         Request(message,url_name,(data_id) =>{
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
         		Request(message, url_champ, (champ) => {
-        		var bannedChampionsstring = new Array();
+        		/*
         		for(var key in data.bannedChampions){
         			bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
         											+" \n champion : "+getChampFromId(champ,data.bannedChampions[key].championId)
         											+" \n teamId : "+data.bannedChampions[key].teamId;
         		}
-        		 
+        		 */
             	message.channel.send("game Start time : " +data.gameStartTime
             		+ "\n game Mode :" + data.gameMode
             		+ "\n game Type :" + data.gameType
