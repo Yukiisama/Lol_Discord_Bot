@@ -56,6 +56,7 @@ client.on("message", async message => {
     var message_content_encode= unescape(encodeURIComponent(message.content));
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const args_encode = message_content_encode.slice(config.prefix.length).trim().split(/ +/g);
+    const command_encoded = args_encode.shift().toLowerCase();
     const command = args.shift().toLowerCase();
     if (command === "ping") {
         const m = await message.channel.send("Ping?");
