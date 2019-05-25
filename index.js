@@ -2,6 +2,9 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const Request = require("Request");
+const https = require("https");
+
 //Decomment this if local
 //const config_tok = require("./config_noshare.json"); // Private config in which you can specify your token if you want to use local way
 var webshot = require('webshot');
@@ -74,7 +77,7 @@ client.on("message", async message => {
         message.channel.send("https://www.twitch.tv/suyukii");
     }
     if (command === "randomrole") {
-        message.channel.send(role_array[Math.floor(Math.random()*role_array.length)]);
+        message.channel.send(role_array[Math.floor(Math.random() * role_array.length)]);
     }
     if (command === "hero") {
         if (args[1] != role_array[1] && args[1] != role_array[4] && args[1] != role_array[0] &&
@@ -96,6 +99,13 @@ client.on("message", async message => {
             options.screenSize.height = 810;
 
         }
+    }
+    if (command === "level") {
+        message.channel.send("faut pas que j'oublie que la clé api lol dure que 24h à reset après :(");
+        let url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + args[0] + '?api_key=' + process.env.LOL_API;
+        Request(message, url, (data) => {
+            message.channel.send(args[0] + " is level " + data.summonerLevel + ", congrats!");
+        });
     }
 });
 
