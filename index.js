@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const config = require("./config.json");
 const Request = require("./Request");
 const https = require("https");
-
+const champion = require("./champion.json");
 //Decomment this if local
 //const config_tok = require("./config_noshare.json"); // Private config in which you can specify your token if you want to use local way
 var webshot = require('webshot');
@@ -29,7 +29,7 @@ var options = {
 var role_array = ["top", "middle", "jungle", "adc", "support"];
 const name_url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/';
 const active_games_url = 'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/';
-let url_champ = "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json";
+
 /***********************************************************END VARIABLES*********************************************************************************** */
 
 /**
@@ -50,7 +50,7 @@ function shot(img_name, path, website, message) {
     });
 }
 
-function getChampFromId(champions,id){
+function getChampFromId(id){
       for (var key in champions.champList.data) {
           // skip loop if the property is from prototype
           if (!champions.champList.data.hasOwnProperty(key)) continue;
@@ -131,13 +131,13 @@ client.on("message", async message => {
         Request(message,url_name,(data_id) =>{
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
-        		/*Request(message, url_champ, (champ) => {
+        		
         		
         		for(var key in data.bannedChampions){
         			bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
-        											+" \n champion : "+getChampFromId(champ,data.bannedChampions[key].championId)
+        											+" \n champion : "+getChampFromId(data.bannedChampions[key].championId)
         											+" \n teamId : "+data.bannedChampions[key].teamId;
-        		}*/
+        		}
         		 
             	message.channel.send("game Start time : " +data.gameStartTime
             		+ "\n game Mode :" + data.gameMode
