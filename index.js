@@ -121,7 +121,13 @@ client.on("message", async message => {
         Request(message,url_name,(data_id) =>{
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
-            	message.channel.send(data);
+            	message.channel.send("game Start time : " +data.gameStartTime
+            		+ "\n game Mode :" + data.gameMode
+            		+ "\n game Type :" + data.gameType
+            		+ "\n banned champions :" + data.bannedChampions
+            		+ "\n participants :" + data.participants
+            		+ "\n gameLength (sec) :" + data.gameLength
+            		+ "\n Queue type :" + data.gameQueueConfigId);
             	//[Todo] choose informations usefull then display them in embed discord message
        		 });
         });
