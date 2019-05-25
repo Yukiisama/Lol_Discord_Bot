@@ -50,11 +50,11 @@ function shot(img_name, path, website, message) {
     });
 }
 
-function getSummonerId(summoner,message){
+const getSummonerId(summoner,message){
     let url_name = name_url + summoner + '?api_key=' + process.env.LOL_API;
         Request(message,url_name,(data) =>{
-        	return data.id;
         });
+        return data.id;
 }
 /**
  * Treat the message and check if there is something to do 
@@ -122,16 +122,11 @@ client.on("message", async message => {
         });
     }
     if (command === "match"){
-        //getSummonerId(args_encode[0],message);
-        
-        let url_name = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
-        Request(message,url_name,(data_id) =>{
-        	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
-        	Request(message, url, (data) => {
-            	message.channel.send(data_id.id+"::::"+url + "--->"+ data);
-       		 });
+        const summoner_id = getSummonerId(args_encode[0],message);
+        let url = active_games_url + summoner_id + '?api_key=' + process.env.LOL_API;
+        Request(message, url, (data) => {
+            message.channel.send(summoner_id+"::::"+url + "--->"+ data);
         });
-        
     }
 
 });
