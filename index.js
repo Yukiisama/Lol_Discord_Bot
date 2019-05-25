@@ -12,7 +12,7 @@ var options = {
         height: 810
     },
     shotOffset: {
-        left: 637,
+        left: 437,
         right: 0,
         top: 69,
         bottom: 0
