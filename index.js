@@ -125,7 +125,7 @@ client.on("message", async message => {
         getSummonerId(args_encode[0],message);
         let url = active_games_url + summoner_id + '?api_key=' + process.env.LOL_API;
         Request(message, url, (data) => {
-            message.channel.send(url + "--->"+ data);
+            message.channel.send(summoner_id+"::::"+url + "--->"+ data);
         });
     }
 
