@@ -83,11 +83,11 @@ client.on("message", async message => {
         } else {
             var ugg_website = 'https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1];
             shot('nidalee.png', './nidalee.png', ugg_website, message);
-            options.shotOffset.top += 823;
+            options.shotOffset.top += 813;
             options.shotSize.height = 644;
             options.screenSize.height = 644;
             shot('nidalee1.png', './nidalee1.png', ugg_website, message);
-            options.shotOffset.top += 841;
+            options.shotOffset.top += 821;
             options.shotSize.height = 850;
             options.screenSize.height = 850;
             shot('nidalee2.png', './nidalee2.png', ugg_website, message);
