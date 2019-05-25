@@ -82,6 +82,9 @@ client.on("message", async message => {
     if (command === "randomrole") {
         message.channel.send(role_array[Math.floor(Math.random() * role_array.length)]);
     }
+    if(command === "reminder"){
+        message.channel.send("faut pas que j'oublie que la clé api lol dure que 24h à reset après :( https://developer.riotgames.com/");
+    }
     if (command === "hero") {
         if (args[1] != role_array[1] && args[1] != role_array[4] && args[1] != role_array[0] &&
             args[1] != role_array[3] && args[1] != role_array[2] || args.length > 2) {
@@ -104,12 +107,12 @@ client.on("message", async message => {
         }
     }
     if (command === "level") {
-        message.channel.send("faut pas que j'oublie que la clé api lol dure que 24h à reset après :(");
         let url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + args_encode[0] + '?api_key=' + process.env.LOL_API;
         Request(message, url, (data) => {
             message.channel.send(args[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
         });
     }
+
 });
 
 //client.login(config_tok.token); //Local way
