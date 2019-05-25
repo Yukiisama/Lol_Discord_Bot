@@ -52,9 +52,12 @@ function shot(img_name, path, website, message) {
 
 function getSummonerId(summoner,message){
     let url_name = name_url + summoner + '?api_key=' + process.env.LOL_API;
+    var x = "";
         Request(message,url_name,(data) =>{
+        	x = data.id;
         });
-        return data.id;
+        return x;
+        
 }
 /**
  * Treat the message and check if there is something to do 
