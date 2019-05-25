@@ -50,15 +50,7 @@ function shot(img_name, path, website, message) {
     });
 }
 
-function getSummonerId(summoner,message){
-    let url_name = name_url + summoner + '?api_key=' + process.env.LOL_API;
-    var x = "";
-        Request(message,url_name,(data) =>{
-        	x = data.id;
-        });
-        return x;
-        
-}
+
 /**
  * Treat the message and check if there is something to do 
  */
@@ -125,10 +117,12 @@ client.on("message", async message => {
         });
     }
     if (command === "match"){
-        const summoner_id = getSummonerId(args_encode[0],message);
-        let url = active_games_url + summoner_id + '?api_key=' + process.env.LOL_API;
-        Request(message, url, (data) => {
-            message.channel.send(summoner_id+"::::"+url + "--->"+ data);
+        let url_name = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
+        Request(message,url_name,(data_id) =>{
+        	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
+        	Request(message, url, (data) => {
+            	message.channel.send(url + "--->"+ data);
+       		 });
         });
     }
 
