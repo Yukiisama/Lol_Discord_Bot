@@ -53,8 +53,9 @@ function shot(img_name, path, website, message) {
 function getChampFromId(id){
       for (var key in champions.data) {
           // skip loop if the property is from prototype
-          if (!champions.data.hasOwnProperty(key)) continue;
+          //if (!champions.data.hasOwnProperty(key)) continue;
           var obj = champions.data[key];
+          console.log("act ; " + key);
           if(obj.id === id){ return key;}
       }
       return "Not Found";
@@ -138,6 +139,7 @@ client.on("message", async message => {
         											+" \n champion : "+getChampFromId(data.bannedChampions[key].championId)
                                                     +" \n teamId : "+data.bannedChampions[key].teamId;*/
                     message.channel.send("\n"+key+ " : " +getChampFromId(data.bannedChampions[key].championId ));
+                    console.log("\n"+key+ " : " +getChampFromId(data.bannedChampions[key].championId );
         		}
         		 
             	message.channel.send("game Start time : " +data.gameStartTime
