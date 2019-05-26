@@ -55,7 +55,7 @@ function getChampFromKey(message,key){
           // skip loop if the property is from prototype
           if (!champion.data.hasOwnProperty(name)) continue;
           var obj = champion.data[name];
-          message.channel.send("act2 ; " key + " :"  +obj.key);
+          //message.channel.send("act2 ; " key + " :"  +obj.key);
           if(obj.key === key){message.channel.send("act ; " + name); return name;}
       }
       return "Not Found";
