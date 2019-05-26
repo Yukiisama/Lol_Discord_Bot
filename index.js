@@ -76,10 +76,12 @@ function getSpellFromKey(message,key){
 var str_rank_blue = "";
 var str_rank_red = "";
 var cpt_send_rank = 0;
-
+var blue_send_rank = false;
+var red_send_rank = false;
 function send_rank(message,id,name){
 let url_rank = rank_url + id + '?api_key=' + process.env.LOL_API;
 var str = "**"+name+ "**   \n";
+
     Request(message, url_rank, (data_rank) => {
         
         for(var x in data_rank){
@@ -94,22 +96,24 @@ var str = "**"+name+ "**   \n";
             str_rank_red+=str;
         cpt_send_rank++;
         if(cpt_send_rank==5){
-            if(!str_rank_blue.includes("undefined")){
+            if(!str_rank_blue.includes("undefined") && !blue_send_rank){
             const embed = new Discord.RichEmbed()
                   .setTitle('Live Match Ranks (1/2)')
                   .setColor("#f4f740")
                   .addField("** Players **", str_rank_blue)
                 message.channel.send({embed});
+                blue_send_rank=true;
             }
         }
 
         else if(cpt_send_rank==10){
             const embed = new Discord.RichEmbed()
-             if(!str_rank_red.includes("undefined")){
+             if(!str_rank_red.includes("undefined") && !red_send_rank){
                   .setTitle('Live Match Ranks (2/2)')
                   .setColor("#E8990F")
                   .addField("** Players **", str_rank_red)
                 message.channel.send({embed});
+                red_send_rank = true;
             }
         }
     });
@@ -235,6 +239,8 @@ client.on("message", async message => {
 str_rank_red ="";
 str_rank_blue="";
 cpt_send_rank=0;
+blue_send_rank=false;
+red_send_rank=false;
 });
 
 //client.login(config_tok.token); //Local way
