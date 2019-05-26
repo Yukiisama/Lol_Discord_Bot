@@ -133,11 +133,12 @@ client.on("message", async message => {
         	Request(message, url, (data) => {
         		
         		
-        		/*for(var key in data.bannedChampions){
-        			bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
+        		for(var key in data.bannedChampions){
+        			/*bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
         											+" \n champion : "+getChampFromId(data.bannedChampions[key].championId)
-        											+" \n teamId : "+data.bannedChampions[key].teamId;
-        		}*/
+                                                    +" \n teamId : "+data.bannedChampions[key].teamId;*/
+                    message.channel.send("ban :" +data.bannedChampions[key].championId );
+        		}
         		 
             	message.channel.send("game Start time : " +data.gameStartTime
             		+ "\n game Mode :" + data.gameMode
