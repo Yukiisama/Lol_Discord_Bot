@@ -73,7 +73,8 @@ function getSpellFromKey(message,key){
       return "Not Found";
 }
 
-var str2 = "";
+var str_rank_blue = "";
+var str_rank_red = "";
 var cpt_send_rank = 0;
 
 function send_rank(message,id,name){
@@ -83,16 +84,28 @@ var str = "**"+name+ "**   \n";
         
         for(var x in data_rank){
             str+=data_rank[x].queueType + ":    **" +  data_rank[x].tier +"   " +data_rank[x].rank+ "**   \n"
-            +"Points : **" + data_rank[x].leaguePoints + "**   Wins : **" + data_rank[x].wins  + "**   Loose : **" + data_rank[x].losses + "** \n"; 
+                +"Points : **" + data_rank[x].leaguePoints + "**   Wins : **" + data_rank[x].wins + "**   Loose : **" + data_rank[x].losses + "** \n \n"; 
+            
 
-        }             
-        str2+=str;
+        } 
+        if(cpt_send_rank<5)            
+            str_rank_blue+=str;
+        else
+            str_rank_red+=str;
         cpt_send_rank++;
-        if(cpt_send_rank==9){
+        if(cpt_send_rank==5){
             const embed = new Discord.RichEmbed()
-                  .setTitle('Live Match Ranks')
+                  .setTitle('Live Match Ranks (1/2)')
                   .setColor("#f4f740")
-                  .addField("** Game Mode **", str2)
+                  .addField("** Players **", str_rank_blue)
+                message.channel.send({embed});
+        }
+
+        else if(cpt_send_rank==10){
+            const embed = new Discord.RichEmbed()
+                  .setTitle('Live Match Ranks (2/2)')
+                  .setColor("#E8990F")
+                  .addField("** Players **", str_rank_red)
                 message.channel.send({embed});
         }
     });
@@ -171,13 +184,13 @@ client.on("message", async message => {
         let url_name = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
         var dt = [];
         Request(message,url_name,(data_id) =>{
-        	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
-        	Request(message, url, (data) => {
+            let url = active_games_url + data_id.id + '?api_key=' +process.env.LOL_API;
+            Request(message, url, (data) => {
 
-        		for(var key in data.bannedChampions){
+                for(var key in data.bannedChampions){
                     //bannedChampions[key].TeamId et bannedChampions[key].pickTurn
-        			bannedChampionsstring += "\n"+key+ " : " +getChampFromKey(message,data.bannedChampions[key].championId);
-        		}
+                    bannedChampionsstring += "\n"+key+ " : " +getChampFromKey(message,data.bannedChampions[key].championId);
+                }
                 let i = 0;
                 for(var key in data.participants){
                     //b[key].TeamId et banned.champions[key].pickTurn
@@ -209,13 +222,14 @@ client.on("message", async message => {
                 
 
                 message.channel.send({embed});
-            	//[Todo] choose informations usefull then display them in embed discord message
-       		 	//});
-        	});
+                //[Todo] choose informations usefull then display them in embed discord message
+                //});
+            });
         });
 
     }
-str2 ="";
+str_rank_red ="";
+str_rank_blue="";
 cpt_send_rank=0;
 });
 
