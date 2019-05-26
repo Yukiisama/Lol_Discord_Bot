@@ -94,19 +94,23 @@ var str = "**"+name+ "**   \n";
             str_rank_red+=str;
         cpt_send_rank++;
         if(cpt_send_rank==5){
+            if(!str_rank_blue.includes("undefined")){
             const embed = new Discord.RichEmbed()
                   .setTitle('Live Match Ranks (1/2)')
                   .setColor("#f4f740")
                   .addField("** Players **", str_rank_blue)
                 message.channel.send({embed});
+            }
         }
 
         else if(cpt_send_rank==10){
             const embed = new Discord.RichEmbed()
+             if(!str_rank_red.includes("undefined")){
                   .setTitle('Live Match Ranks (2/2)')
                   .setColor("#E8990F")
                   .addField("** Players **", str_rank_red)
                 message.channel.send({embed});
+            }
         }
     });
 }
