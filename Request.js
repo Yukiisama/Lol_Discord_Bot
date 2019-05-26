@@ -1,7 +1,7 @@
 const https = require("https");
 
 
-module.exports = function Request(message, url, f) {
+module.exports =  function Request(message, url, f) {
     try {
         https.get(url, (resp) => {
 

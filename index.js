@@ -5,6 +5,7 @@ const config = require("./config.json");
 const Request = require("./Request");
 const https = require("https");
 const champion = require("./champion.json");
+const sum_spell = require("./summoner.json");
 //Decomment this if local
 //const config_tok = require("./config_noshare.json"); // Private config in which you can specify your token if you want to use local way
 var webshot = require('webshot');
@@ -29,6 +30,7 @@ var options = {
 var role_array = ["top", "middle", "jungle", "adc", "support"];
 const name_url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/';
 const active_games_url = 'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/';
+const rank_url = 'https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/'
 
 /***********************************************************END VARIABLES*********************************************************************************** */
 
@@ -51,16 +53,50 @@ function shot(img_name, path, website, message) {
 }
 
 function getChampFromKey(message,key){
+      
       for (var name in champion.data) {
           // skip loop if the property is from prototype
           if (!champion.data.hasOwnProperty(name)) continue;
-          var obj = champion.data[name];
-          //message.channel.send("act2 ; " key + " :"  +obj.key);
-          if(obj.key === key){message.channel.send("act ; " + name); return name;}
+          var obj = champion.data[name];    
+          if(String(obj.key) === String(key)){console.log("act ; " + name); return name;}
+      }
+      return "Not Found";
+}
+function getSpellFromKey(message,key){
+      
+      for (var name in sum_spell.data) {
+          // skip loop if the property is from prototype
+          if (!sum_spell.data.hasOwnProperty(name)) continue;
+          var obj = sum_spell.data[name];    
+          if(String(obj.key) === String(key)){console.log("act ; " + name); return sum_spell.data[name].name;}
       }
       return "Not Found";
 }
 
+var str2 = "";
+var cpt_send_rank = 0;
+
+function send_rank(message,id,name){
+let url_rank = rank_url + id + '?api_key=' + process.env.LOL_API;
+var str = "**"+name+ "**   \n";
+    Request(message, url_rank, (data_rank) => {
+        
+        for(var x in data_rank){
+            str+=data_rank[x].queueType + ":    **" +  data_rank[x].tier +"   " +data_rank[x].rank+ "**   \n"
+            +"Points : **" + data_rank[x].leaguePoints + "**   Wins : **" + data_rank[x].wins  + "**   Loose : **" + data_rank[x].losses + "** \n"; 
+
+        }             
+        str2+=str;
+        cpt_send_rank++;
+        if(cpt_send_rank==9){
+            const embed = new Discord.RichEmbed()
+                  .setTitle('Live Match Ranks')
+                  .setColor("#f4f740")
+                  .addField("** Game Mode **", str2)
+                message.channel.send({embed});
+        }
+    });
+}
 /**
  * Treat the message and check if there is something to do 
  */
@@ -126,35 +162,61 @@ client.on("message", async message => {
             message.channel.send(args[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
         });
     }
+
     if (command === "match"){
+        var bannedChampionsstring = "";
+        var participants = [];
+        var blueteam = "";
+        var redteam = "";
         let url_name = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
-        var bannedChampionsstring = new Array();
+        var dt = [];
         Request(message,url_name,(data_id) =>{
         	let url = active_games_url + data_id.id + '?api_key=' + process.env.LOL_API;
         	Request(message, url, (data) => {
-        		
-        		message.channel.send("Banned Champions : ");
+
         		for(var key in data.bannedChampions){
-        			/*bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
-        											+" \n champion : "+getChampFromId(data.bannedChampions[key].championId)
-                                                    +" \n teamId : "+data.bannedChampions[key].teamId;*/
-                    message.channel.send("\n"+key+ " : " +getChampFromKey(message,data.bannedChampions[key].championId));
-                    message.channel.send("\n"+key+ " : " +data.bannedChampions[key].championId);
+                    //bannedChampions[key].TeamId et bannedChampions[key].pickTurn
+        			bannedChampionsstring += "\n"+key+ " : " +getChampFromKey(message,data.bannedChampions[key].championId);
         		}
-        		 
-            	message.channel.send("game Start time : " +data.gameStartTime
-            		+ "\n game Mode :" + data.gameMode
-            		+ "\n game Type :" + data.gameType
-            		+ "\n banned champions :" + bannedChampionsstring
-            		+ "\n participants :" + data.participants
-            		+ "\n gameLength (sec) :" + data.gameLength
-            		+ "\n Queue type :" + data.gameQueueConfigId);
+                let i = 0;
+                for(var key in data.participants){
+                    //b[key].TeamId et banned.champions[key].pickTurn
+                    participants[key] = "\n"+"**"+data.participants[key].summonerName+ "** : ***" +getChampFromKey(message,data.participants[key].championId)
+                        + "*** " + getSpellFromKey(message,data.participants[key].spell1Id) + " " +getSpellFromKey(message,data.participants[key].spell2Id);
+                    if(i<5)
+                        blueteam+=participants[key];
+                    else
+                        redteam+=participants[key];
+                    i++;
+                    send_rank(message,data.participants[key].summonerId,data.participants[key].summonerName);    
+                    
+                }
+                
+
+                
+                const embed = new Discord.RichEmbed()
+                  .setDescription('Live Match')
+                  .setColor(12717994)
+                  .addField("** Game Mode **", data.gameMode,true)
+                  .addField("**Game Type **" , data.gameType,true)
+                  .addField("**BannedChampions **" , bannedChampionsstring)
+                  .addField("**gameLength (sec) **" , data.gameLength,true)
+                  .addField("**Queue type **" , data.gameQueueConfigId,true)
+                  .addField("**Blue Team**",blueteam)
+                  .addField("**Red Team**",redteam)
+
+                
+                
+
+                message.channel.send({embed});
             	//[Todo] choose informations usefull then display them in embed discord message
        		 	//});
         	});
         });
-    }
 
+    }
+str2 ="";
+cpt_send_rank=0;
 });
 
 //client.login(config_tok.token); //Local way
