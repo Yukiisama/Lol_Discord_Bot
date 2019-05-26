@@ -50,13 +50,13 @@ function shot(img_name, path, website, message) {
     });
 }
 
-function getChampFromId(id){
-      for (var key in champion.data) {
+function getChampFromKey(key){
+      for (var name in champion.data) {
           // skip loop if the property is from prototype
-          if (!champion.data.hasOwnProperty(key)) continue;
-          var obj = champion.data[key];
-          console.log("act ; " + key);
-          if(obj.id === id){ return key;}
+          if (!champion.data.hasOwnProperty(name)) continue;
+          var obj = champion.data[name];
+          console.log("act ; " + name);
+          if(obj.key === key){ return name;}
       }
       return "Not Found";
 }
@@ -138,7 +138,7 @@ client.on("message", async message => {
         			/*bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
         											+" \n champion : "+getChampFromId(data.bannedChampions[key].championId)
                                                     +" \n teamId : "+data.bannedChampions[key].teamId;*/
-                    message.channel.send("\n"+key+ " : " +getChampFromId(data.bannedChampions[key].championId));
+                    message.channel.send("\n"+key+ " : " +getChampFromKey(data.bannedChampions[key].championId));
                     console.log("\n"+key+ " : " +data.bannedChampions[key].championId);
         		}
         		 
