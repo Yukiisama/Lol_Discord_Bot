@@ -107,8 +107,9 @@ var str = "**"+name+ "**   \n";
         }
 
         else if(cpt_send_rank==10){
+            if(!str_rank_red.includes("undefined") && !red_send_rank){
             const embed = new Discord.RichEmbed()
-             if(!str_rank_red.includes("undefined") && !red_send_rank){
+             
                   .setTitle('Live Match Ranks (2/2)')
                   .setColor("#E8990F")
                   .addField("** Players **", str_rank_red)
@@ -178,7 +179,7 @@ client.on("message", async message => {
         }
     }
     if (command === "level") {
-        let url = name_url + args_encode[0] + '?api_key=' + process.env.LOL_API;
+        let url = name_url + args_encode[0] + '?api_key=' +process.env.LOL_API;
         Request(message, url, (data) => {
             message.channel.send(args[0] + " is level " + data.summonerLevel + " on League of Legends , congrats! ♥ ");
         });
