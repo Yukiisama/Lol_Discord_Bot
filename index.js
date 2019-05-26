@@ -51,10 +51,10 @@ function shot(img_name, path, website, message) {
 }
 
 function getChampFromId(id){
-      for (var key in champions.data) {
+      for (var key in champion.data) {
           // skip loop if the property is from prototype
-          //if (!champions.data.hasOwnProperty(key)) continue;
-          var obj = champions.data[key];
+          if (!champion.data.hasOwnProperty(key)) continue;
+          var obj = champion.data[key];
           console.log("act ; " + key);
           if(obj.id === id){ return key;}
       }
