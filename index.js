@@ -138,8 +138,8 @@ client.on("message", async message => {
         			/*bannedChampionsstring[key] = "Champ "+key+" : pickTurn : "+data.bannedChampions[key].pickTurn
         											+" \n champion : "+getChampFromId(data.bannedChampions[key].championId)
                                                     +" \n teamId : "+data.bannedChampions[key].teamId;*/
-                    message.channel.send("\n"+key+ " : " +getChampFromId(data.bannedChampions[key].championId ));
-                    console.log("\n"+key+ " : " +getChampFromId(data.bannedChampions[key].championId) );
+                    //message.channel.send("\n"+key+ " : " +getChampFromId(data.bannedChampions[key].championId ));
+                    console.log("\n"+key+ " : " +data.bannedChampions[key].championId);
         		}
         		 
             	message.channel.send("game Start time : " +data.gameStartTime
