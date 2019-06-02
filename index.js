@@ -206,7 +206,7 @@ client.on("message", async message => {
             args[1] != role_array[3] && args[1] != role_array[2] || args.length > 2) {
             message.channel.send("Command line is !a hero <champion> <middle/support/jungle/adc/top");
         } else {
-            var ugg_website = 'https://u.gg/lol/champions/' + args[0] + '/build/?role=' + args[1];
+            var ugg_website = 'https://u.gg/lol/champions/' + args[0] + '/build/?rank=diamond_plus&role=' + args[1];
             shot('nidalee.png', './nidalee.png', ugg_website, message);
             options.shotOffset.top += 803;
             options.shotSize.height = 644;
