@@ -24,4 +24,4 @@ node index.js
  * __!a <corobizar/mv/yukii/gummy>__ : bot send twitch channel of corobizar / mister mv / yukii or gummy
  * __!a rank <pseudo>__: Send rank informations into the channel you asked for
  ![](https://i.imgur.com/qO6xrVP.png)
- ![](https://i.imgur.com/iug6a2P.png)
+ ![](https://i.imgur.com/M3MLPi7.png)
