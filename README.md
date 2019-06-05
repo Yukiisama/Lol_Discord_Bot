@@ -30,6 +30,9 @@ node index.js
  ![](https://i.imgur.com/qO6xrVP.png)
  ![](https://i.imgur.com/M3MLPi7.png)
  * __!a match < pseudo >__: Send match live informations into the channel you asked for
+ 
  ![](https://i.imgur.com/ZRzViYt.png)
+ 
  ![](https://i.imgur.com/KeGjenB.png)
+ 
  ![](https://i.imgur.com/3JG3FKF.png)
