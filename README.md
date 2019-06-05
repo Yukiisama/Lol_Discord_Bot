@@ -18,7 +18,7 @@ node index.js
 ```
 ## Commands
  * __!a say__ _this is a random sentence_ :  bot delete your message then write what you ask 
- * __!a hero <champion> <top/middle/jungle/adc/support>__: bot send informations from u.gg about the champion you asked for (i.e screenshots) 
+ * __!a hero <champion> <top/middle/jungle/adc/support>__: bot send informations from u.gg about the champion you asked for
  ![](https://i.imgur.com/Qk1FfLx.png)
  ![](https://i.imgur.com/9LhUNcM.png)
  ![](https://i.imgur.com/hnXDLdx.png)
