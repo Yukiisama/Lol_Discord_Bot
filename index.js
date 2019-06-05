@@ -278,6 +278,32 @@ client.on("message", async message => {
     if (command === "rank") {
         rank(message, args_encode[0], args[0]);
     }
+    if(command === "help"){
+        let say = " !a say this is a random sentence : bot delete your message then write what you ask";
+        let hero = "!a hero <top/middle/jungle/adc/support>: bot send informations from u.gg about the champion you asked for ";
+        let ping = "!a ping : a simple test of ping";
+        let randomrole = "!a randomrole : give you a random League of Legends role";
+        let twitch = "!a <corobizar/mv/yukii/gummy> : bot send twitch channel of corobizar / mister mv / yukii or gummy";
+        let level = "!a level < pseudo > : bot send level of pseudo on League of Legends";
+        let rank = "!a rank < pseudo >: Send rank informations into the channel you asked for ";
+        let match = "!a match < pseudo >: Send match live informations into the channel you asked for";
+
+
+        const embed = new Discord.RichEmbed()
+                    .setDescription('Help')
+                    .setColor(12717994)
+                    .addField("** #Command 1 **", say, true)
+                    .addField("** #Command 2 **", hero, true)
+                    .addField("** #Command 3 **", ping, true)
+                    .addField("** #Command 4 **", randomrole, true)
+                    .addField("** #Command 5 **", twitch, true)
+                    .addField("** #Command 6 **", level, true)
+                    .addField("** #Command 7 **", rank, true)
+                    .addField("** #Command 8 **", match, true)
+                message.channel.send({
+                    embed
+                });
+    }
 
     str_rank_red = "";
     str_rank_blue = "";
