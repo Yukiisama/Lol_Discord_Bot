@@ -22,6 +22,11 @@ node index.js
  * __!a ping__ : a simple test of ping
  * __!a randomrole__ : give you a random League of Legends role
  * __!a <corobizar/mv/yukii/gummy>__ : bot send twitch channel of corobizar / mister mv / yukii or gummy
+  * __!a level < pseudo >__ : bot send level of pseudo on League of Legends
  * __!a rank < pseudo >__: Send rank informations into the channel you asked for
  ![](https://i.imgur.com/qO6xrVP.png)
  ![](https://i.imgur.com/M3MLPi7.png)
+ * __!a match < pseudo >__: Send match live informations into the channel you asked for
+ ![](https://i.imgur.com/ZRzViYt.png)
+ ![](https://i.imgur.com/KeGjenB.png)
+ ![](https://i.imgur.com/3JG3FKF.png)
