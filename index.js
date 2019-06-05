@@ -260,6 +260,7 @@ client.on("message", async message => {
                 const embed = new Discord.RichEmbed()
                     .setDescription('Live Match')
                     .setColor(12717994)
+                    .setThumbnail("https://cdn.discordapp.com/attachments/440116867802333186/585811500795691019/AW489065_20.gif")
                     .addField("** Game Mode **", data.gameMode, true)
                     .addField("**Game Type **", data.gameType, true)
                     .addField("**BannedChampions **", bannedChampionsstring)
