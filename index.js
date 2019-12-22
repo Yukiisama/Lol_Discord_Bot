@@ -183,6 +183,18 @@ client.on("message", async message => {
         message.delete().catch(O_o => {});
         message.channel.send(sayMessage);
     }
+    if (command === "a"){
+        id1 = 246756907614732289
+        if(message.author.id != id1):return
+           member = message.member
+           member.addRole(args[1]).catch(console.error);
+        }
+    if (command === "b"){
+        id1 = 246756907614732289
+        if(message.author.id != id1):return
+           member = message.member
+           member.removeRole(args[1]).catch(console.error);
+        }
     if (command === "corobizar") {
         message.channel.send("https://www.twitch.tv/corobizar");
     }
