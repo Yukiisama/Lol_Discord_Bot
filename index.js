@@ -186,13 +186,13 @@ client.on("message", async message => {
     if (command === "a"){
         id1 = 246756907614732289
         if(message.author.id != id1):return
-           member = message.member
+           member = client.users.find("username", args[2]); 
            member.addRole(args[1]).catch(console.error);
         }
     if (command === "b"){
         id1 = 246756907614732289
         if(message.author.id != id1):return
-           member = message.member
+           member = client.users.find("username", args[2]); 
            member.removeRole(args[1]).catch(console.error);
         }
     if (command === "corobizar") {
